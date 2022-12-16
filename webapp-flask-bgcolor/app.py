@@ -7,20 +7,20 @@ import argparse
 app = Flask(__name__)
 
 color_codes = {
-    "red": "#ff0000",
-    "green": "#00ff00",
-    "blue": "#0000ff",
-    "olive": "#808000",
-    "purple": "#800080",
-    "navy": "#000080"
+    "#FF0000": "red" ,
+    "#00FF00": "green" ,
+    "#0000FF": "blue" ,
+    "#808000": "olive" ,
+    "#800080": "purple" ,
+    "#000080": "navy" 
 }
 
 SUPPORTED_COLORS = ",".join(color_codes.keys())
 
 # Get color from Environment variable
-COLOR_FROM_ENV = os.environ.get('APP_COLOR')
+COLOR_FROM_ENV = os.environ.get('APP_COLORHEXCODE')
 # Generate a random color
-COLOR = random.choice(["red", "green", "blue", "olive", "purple", "navy"])
+COLOR = random.choice(["#FF0000", "#00FF00", "#0000FF", "#808000", "#800080", "#000080"])
 # Get dynamic title from Environment variable
 TITLE_FROM_ENV = os.environ.get('APP_TITLE')
 # Set default title
@@ -37,7 +37,7 @@ if __name__ == "__main__":
           "The color can be specified in two different ways: \n"
           "    1. As a command line argument with --color as the argument. Accepts one of the following \n"
           "       colors according the list below. \n"
-          "    2. As an Environment variable APP_COLOR. Accepts one of the following colors according \n"
+          "    2. As an Environment variable APP_COLORHEXCODE. Accepts one of the following colors according \n"
           "       the list below.\n"
           "In any other case, a random color is picked from the list below.\n"
           "\n"
@@ -49,14 +49,14 @@ if __name__ == "__main__":
 
     # Check for Command Line Parameters for color
     parser = argparse.ArgumentParser()
-    parser.add_argument('--color', required=False)
+    parser.add_argument('--colorhexcode', required=False)
     # Check for Command Line Parameters for title
     parser.add_argument('--title', required=False)
     args = parser.parse_args()
 
-    if args.color:
-        print("Color from command line argument =" + args.color)
-        COLOR = args.color
+    if args.colorhexcode:
+        print("Color from command line argument =" + args.colorhexcode)
+        COLOR = args.colorhexcode
         if COLOR_FROM_ENV:
             print("A color was set through environment variable -" + COLOR_FROM_ENV + ". However, color from command line argument takes precendence.")
     elif COLOR_FROM_ENV:
